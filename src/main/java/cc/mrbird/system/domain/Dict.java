@@ -3,30 +3,30 @@ package cc.mrbird.system.domain;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import cc.mrbird.common.annotation.ExportConfig;
 
 @Table(name = "T_DICT")
-public class Dict implements Serializable {
+public class Dict implements Serializable{
 
-	private static final long serialVersionUID = 1259434280780039424L;
-
-	public static final String SEQ = "seq_dict";
+	private static final long serialVersionUID = 7780820231535870010L;
 
 	@Id
+	@GeneratedValue(generator = "JDBC")
 	@Column(name = "DICT_ID")
 	@ExportConfig(value = "字典ID")
 	private Long dictId;
 
-	@Column(name = "KEY")
+	@Column(name = "KEYY")
 	@ExportConfig(value = "字典Key")
-	private String key;
+	private Long keyy;
 
-	@Column(name = "VALUE")
+	@Column(name = "VALUEE")
 	@ExportConfig(value = "字典Value")
-	private String value;
+	private String valuee;
 
 	@Column(name = "TABLE_NAME")
 	@ExportConfig(value = "列名")
@@ -50,32 +50,20 @@ public class Dict implements Serializable {
 		this.dictId = dictId;
 	}
 
-	/**
-	 * @return KEY
-	 */
-	public String getKey() {
-		return key;
+	public Long getKeyy() {
+		return keyy;
 	}
 
-	/**
-	 * @param key
-	 */
-	public void setKey(String key) {
-		this.key = key;
+	public void setKeyy(Long keyy) {
+		this.keyy = keyy;
 	}
 
-	/**
-	 * @return VALUE
-	 */
-	public String getValue() {
-		return value;
+	public String getValuee() {
+		return valuee;
 	}
 
-	/**
-	 * @param value
-	 */
-	public void setValue(String value) {
-		this.value = value == null ? null : value.trim();
+	public void setValuee(String valuee) {
+		this.valuee = valuee;
 	}
 
 	/**
