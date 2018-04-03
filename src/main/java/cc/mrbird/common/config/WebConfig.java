@@ -14,7 +14,7 @@ import cc.mrbird.common.xss.XssFilter;
 
 @Configuration
 public class WebConfig {
-	
+
 	/**
 	 * XssFilter Bean
 	 */
@@ -31,11 +31,12 @@ public class WebConfig {
 		filterRegistrationBean.setInitParameters(initParameters);
 		return filterRegistrationBean;
 	}
-	
+
 	@Bean
 	public ObjectMapper getObjectMapper() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 		return mapper;
 	}
+
 }

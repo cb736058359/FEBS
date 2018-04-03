@@ -15,7 +15,7 @@ $(function() {
                         closeModal();
                         refresh();
                         $MB.n_success(r.msg);
-                    } else $MB.n_danger(r.msg);
+                    } else $MB.n_danger(r.msg, '.modal');
                 });
             }
             if (name == "update") {
@@ -24,13 +24,14 @@ $(function() {
                         closeModal();
                         refresh();
                         $MB.n_success(r.msg);
-                    } else $MB.n_danger(r.msg);
+                    } else $MB.n_danger(r.msg, '.modal');
                 });
             }
         }
     });
 
     $("#job-add .btn-close").click(function() {
+    	$("#job-add-modal-title").html('新增任务');
         closeModal();
     });
 
@@ -40,7 +41,6 @@ function closeModal() {
 	$("#job-add-button").attr("name", "save");
     $MB.closeAndRestModal("job-add");
     validator.resetForm();
-    $("#job-add-modal-title").html('新增任务');
 }
 
 function validateRule() {
@@ -64,7 +64,7 @@ function validateRule() {
                     dataType: "json",
                     data: {
                         cron: function() {
-                            return $("input[name='cronExpression']").val().trim();
+                            return $("input[name='cronExpression']").val();
                         }
                     }
                 }

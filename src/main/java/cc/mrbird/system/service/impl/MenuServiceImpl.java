@@ -43,21 +43,16 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 
 	@Override
 	public List<Menu> findAllMenus(Menu menu) {
-		try {
-			Example example = new Example(Menu.class);
-			Criteria criteria = example.createCriteria();
-			if (StringUtils.isNotBlank(menu.getMenuName())) {
-				criteria.andCondition("menu_name=", menu.getMenuName());
-			}
-			if (StringUtils.isNotBlank(menu.getType())) {
-				criteria.andCondition("type=", Long.valueOf(menu.getType()));
-			}
-			example.setOrderByClause("menu_id");
-			return this.selectByExample(example);
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-			return new ArrayList<Menu>();
+		Example example = new Example(Menu.class);
+		Criteria criteria = example.createCriteria();
+		if (StringUtils.isNotBlank(menu.getMenuName())) {
+			criteria.andCondition("menu_name=", menu.getMenuName());
 		}
+		if (StringUtils.isNotBlank(menu.getType())) {
+			criteria.andCondition("type=", Long.valueOf(menu.getType()));
+		}
+		example.setOrderByClause("menu_id");
+		return this.selectByExample(example);
 	}
 
 	@Override
@@ -126,7 +121,6 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void addMenu(Menu menu) {
-		menu.setMenuId(this.getSequence(Menu.SEQ));
 		menu.setCreateTime(new Date());
 		if (menu.getParentId() == null)
 			menu.setParentId(0l);

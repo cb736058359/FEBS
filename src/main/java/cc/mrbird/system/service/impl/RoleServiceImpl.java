@@ -45,17 +45,12 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 
 	@Override
 	public List<Role> findAllRole(Role role) {
-		try {
-			Example example = new Example(Role.class);
-			if (StringUtils.isNotBlank(role.getRoleName())) {
-				example.createCriteria().andCondition("role_name=", role.getRoleName());
-			}
-			example.setOrderByClause("create_time");
-			return this.selectByExample(example);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ArrayList<Role>();
+		Example example = new Example(Role.class);
+		if (StringUtils.isNotBlank(role.getRoleName())) {
+			example.createCriteria().andCondition("role_name=", role.getRoleName());
 		}
+		example.setOrderByClause("create_time");
+		return this.selectByExample(example);
 	}
 
 	@Override
@@ -73,7 +68,6 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void addRole(Role role, Long[] menuIds) {
-		role.setRoleId(this.getSequence(Role.SEQ));
 		role.setCreateTime(new Date());
 		this.save(role);
 		for (Long menuId : menuIds) {

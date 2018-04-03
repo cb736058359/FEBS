@@ -1,6 +1,5 @@
 package cc.mrbird.job.service.impl;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,30 +20,24 @@ public class JobLogServiceImpl extends BaseService<JobLog> implements JobLogServ
 
 	@Override
 	public List<JobLog> findAllJobLogs(JobLog jobLog) {
-		try {
-			Example example = new Example(JobLog.class);
-			Criteria criteria = example.createCriteria();
-			if (StringUtils.isNotBlank(jobLog.getBeanName())) {
-				criteria.andCondition("bean_name=", jobLog.getBeanName());
-			}
-			if (StringUtils.isNotBlank(jobLog.getMethodName())) {
-				criteria.andCondition("method_name=", jobLog.getMethodName());
-			}
-			if (StringUtils.isNotBlank(jobLog.getStatus())) {
-				criteria.andCondition("status=", Long.valueOf(jobLog.getStatus()));
-			}
-			example.setOrderByClause("log_id");
-			return this.selectByExample(example);
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-			return new ArrayList<JobLog>();
+		Example example = new Example(JobLog.class);
+		Criteria criteria = example.createCriteria();
+		if (StringUtils.isNotBlank(jobLog.getBeanName())) {
+			criteria.andCondition("bean_name=", jobLog.getBeanName());
 		}
+		if (StringUtils.isNotBlank(jobLog.getMethodName())) {
+			criteria.andCondition("method_name=", jobLog.getMethodName());
+		}
+		if (StringUtils.isNotBlank(jobLog.getStatus())) {
+			criteria.andCondition("status=", Long.valueOf(jobLog.getStatus()));
+		}
+		example.setOrderByClause("log_id");
+		return this.selectByExample(example);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void saveJobLog(JobLog log) {
-		log.setLogId(this.getSequence(JobLog.SEQ));
 		this.save(log);
 	}
 
