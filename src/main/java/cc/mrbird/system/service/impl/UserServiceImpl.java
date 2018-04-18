@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,9 +49,6 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 
 	public List<User> findUserWithDept(User user) {
 		try {
-			if(StringUtils.isNotBlank(user.getUsername())){
-				user.setUsername(user.getUsername().toLowerCase());
-			}
 			return this.userMapper.findUserWithDept(user);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,7 +59,6 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void registUser(User user) {
-		user.setUserId(this.getSequence(User.SEQ));
 		user.setCrateTime(new Date());
 		user.setTheme(User.DEFAULT_THEME);
 		user.setAvatar(User.DEFAULT_AVATAR);
@@ -89,7 +84,6 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void addUser(User user, Long[] roles) {
-		user.setUserId(this.getSequence(User.SEQ));
 		user.setCrateTime(new Date());
 		user.setTheme(User.DEFAULT_THEME);
 		user.setAvatar(User.DEFAULT_AVATAR);
