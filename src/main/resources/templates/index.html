@@ -37,6 +37,7 @@
 </body>
 <script data-th-inline="javascript">
 	var ctx = [[@{/}]];
+	console.log(ctx)
 	var userName = [[${user.username}]];
 	var theme = [[${user.theme}]];
 	var avatar = ctx + "img/avatar/" + [[${user.avatar}]];

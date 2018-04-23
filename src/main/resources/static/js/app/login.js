@@ -6,10 +6,10 @@ $(document).ready(function() {
         increaseArea: '20%'
     });
 
-    var panelOne = $('.form-panel.two').height();
-    /*    panelTwo = $('.form-panel.two')[0].scrollHeight;
+    var panelOne = $('.form-panel.two').height(),
+        panelTwo = $('.form-panel.two')[0].scrollHeight;
 
-   $('.form-panel.two').not('.form-panel.two.active').on('click', function(e) {
+    $('.form-panel.two').not('.form-panel.two.active').on('click', function(e) {
         e.preventDefault();
 
         $('.form-toggle').addClass('visible');
@@ -18,7 +18,7 @@ $(document).ready(function() {
         $('.form').animate({
             'height': panelTwo
         }, 200);
-    });*/
+    });
 
     $('.form-toggle').on('click', function(e) {
         e.preventDefault();
@@ -38,7 +38,6 @@ function reloadCode() {
 }
 
 function login() {
-	var $loginButton = $("#loginButton");
     var username = $(".one input[name='username']").val().trim();
     var password = $(".one input[name='password']").val().trim();
     var code = $(".one input[name='code']").val().trim();
@@ -55,8 +54,6 @@ function login() {
         $MB.n_warning("请输入验证码！");
         return;
     }
-    $loginButton.html("").append("<div class='login-loder'><div class='line-scale'><div></div><div></div><div></div><div></div><div></div></div></div>");
-    
     $.ajax({
         type: "post",
         url: ctx + "login",
@@ -71,15 +68,14 @@ function login() {
             if (r.code == 0) {
                 location.href = ctx + 'index';
             } else {
-        		if (r.msg == '验证码错误！') reloadCode();
+            	if (r.msg == '验证码错误！') reloadCode();
                 $MB.n_warning(r.msg);
-                $loginButton.html("登录");
             }
         }
     });
 }
 
-/*function regist() {
+function regist() {
     var username = $(".two input[name='username']").val().trim();
     var password = $(".two input[name='password']").val().trim();
     var cpassword = $(".two input[name='cpassword']").val().trim();
@@ -125,7 +121,7 @@ function login() {
             }
         }
     });
-}*/
+}
 
 document.onkeyup = function(e) {
     if (window.event)
